@@ -1,0 +1,37 @@
+{
+  "B102": {
+    "cwe": "CWE-78",
+    "name": "exec_used",
+    "title": "Use of exec statement",
+    "guidance": "Avoid dynamic code execution using exec(). Replace with direct function calls, standard dictionary lookups, or explicit mapping tables.",
+    "secure_example": "Use dispatcher dictionary instead of exec(code_string)"
+  },
+  "B307": {
+    "cwe": "CWE-95",
+    "name": "eval_used",
+    "title": "Use of eval statement",
+    "guidance": "Avoid evaluating arbitrary strings with eval(). Use ast.literal_eval() for safe literal parsing, or math/json modules.",
+    "secure_example": "import ast; result = ast.literal_eval(user_input)"
+  },
+  "B602": {
+    "cwe": "CWE-78",
+    "name": "subprocess_popen_with_shell_equals_true",
+    "title": "Subprocess call with shell=True",
+    "guidance": "Do not pass shell=True to subprocess calls or os.system(). Pass command arguments as a list with shell=False and sanitize inputs.",
+    "secure_example": "subprocess.run(['ls', '-l', sanitized_dir], shell=False)"
+  },
+  "B605": {
+    "cwe": "CWE-78",
+    "name": "start_process_with_a_shell",
+    "title": "Start process with a shell",
+    "guidance": "Avoid os.system() or shell execution. Use subprocess.run() or subprocess.Popen with argument vectors.",
+    "secure_example": "subprocess.run(['ping', '-c', '1', host], check=True)"
+  },
+  "B701": {
+    "cwe": "CWE-79",
+    "name": "jinja2_autoescape_false",
+    "title": "Jinja2 template rendering without autoescaping",
+    "guidance": "Enable autoescaping in Jinja2 templates (select_autoescape(['html', 'xml'])) to prevent Cross-Site Scripting (XSS).",
+    "secure_example": "Environment(autoescape=select_autoescape(['html', 'xml']))"
+  }
+}
