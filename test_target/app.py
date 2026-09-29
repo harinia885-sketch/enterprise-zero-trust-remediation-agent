@@ -45,12 +45,11 @@ def index():
 
 @app.route("/calculate", methods=["POST"])
 def calculate():
-    expression = request.form.get("expression", "0")
+    expression = request.form.get('expression', '0')
     try:
-        # VULNERABILITY (B307: eval_used): unsafe dynamic code evaluation
-        result = eval(expression)
+        result = ast.literal_eval(expression)
     except Exception as e:
-        result = f"Error: {str(e)}"
+        result = f'Error: {str(e)}'
     return render_template_string(HTML_TEMPLATE, result=result, ping_output=None)
 
 
